@@ -7,19 +7,21 @@
     {% load bootstrap5 %}
     {# Display django.contrib.messages as Bootstrap alerts #}
     {# {% bootstrap_messages %} #}
-    <h1>Devis</h1>
+    <h1>Mail</h1>
 
     {# Display a form #}
-    <form action="achat" method="post" class="form">
+    <form action="generer" method="post" class="form">
         {% csrf_token %}
 
         {% bootstrap_form form %}
         
 
-        <button type="submit" class="btn btn-primary">Générer</button>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
         
 
     </form>
+
+
 
 </div>
 
