@@ -1,26 +1,26 @@
 from django.shortcuts import render
-from achats.models import Cabinet
-from achats.forms import CabinetForm
-from achats.forms import CabinetV2Form
-from achats.forms import AchatForm
-from achats.forms import MailForm
+
+from achats.forms import AchatForm, CabinetV2Form
+from achats.models import Achat, Cabinet
+
 
 # Create your views here.
 def index(request):
     form = AchatForm()
-    return render(request, 'index.html', {'form': form})
+    return render(request, 'home/index.html', {'form': form})
 
 """Lors d'un achat, le visuel du mail à envoyé est affiché"""
 def achat(request):
     form = AchatForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
-            form.save()
-            mail = MailForm()
-            return render(request, 'generation/index.html', {'form' : mail})
+            achat = Achat()
+            #l'instance est remplie avec le retour de l'enregistrement
+            achat = form.save()
+            return render(request, 'generation/index.html', {'achat' : achat})
 
     
-    return render(request, 'index.html', {'form' : form} )
+    return render(request, 'home/index.html', {'form' : form} )
 
 
 
@@ -52,3 +52,7 @@ def postCabinet(request):
     #data = {'nom_gcl': 'un Nom gcl','nom_juridique': 'un Nom juridique'}
     form = CabinetV2Form()
     return render(request, 'cabinets/form.html', {'form': form})
+
+
+def suivi_achats(request):
+    return "OK"

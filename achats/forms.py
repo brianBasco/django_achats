@@ -5,8 +5,9 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import Achat, Cabinet
 
+
+""" Modèle de formulaire non utilisé, à garder pour l'exemple"""
 class CabinetForm(forms.Form):
-    #template_name = "form_snippet.html"
     nom_gcl = forms.CharField(label='nom gcl',max_length=200, widget=forms.TextInput(attrs={'class': "form-control"}))
     nom_juridique = forms.CharField(label='nom juridique',max_length=200, widget=forms.TextInput(attrs={'class': "form-control"}))
 
@@ -28,6 +29,7 @@ class CabinetForm(forms.Form):
         return self.cleaned_data
         
 
+""" Formulaire actuellement utilisé """
 class CabinetV2Form(ModelForm):
     class Meta:
         model = Cabinet
@@ -56,9 +58,3 @@ class AchatForm(ModelForm):
             'date_devis' : _('Date'),
             'valide' : _('validé')
         }
-    
-class MailForm(forms.Form):
-    c = forms.SlugField()
-    contenu = forms.Textarea()
-    nom_gcl = forms.CharField(label='nom gcl',max_length=200, widget=forms.TextInput(attrs={'class': "form-control"}))
-    nom_juridique = forms.CharField(label='nom juridique',max_length=200, widget=forms.TextInput(attrs={'class': "form-control"}))

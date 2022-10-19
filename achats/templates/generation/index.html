@@ -5,21 +5,39 @@
 <div class="container">
 
     {% load bootstrap5 %}
-    {# Display django.contrib.messages as Bootstrap alerts #}
-    {# {% bootstrap_messages %} #}
-    <h1>Mail</h1>
-
-    {# Display a form #}
-    <form action="generer" method="post" class="form">
-        {% csrf_token %}
-
-        {% bootstrap_form form %}
-        
-
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-        
-
-    </form>
+    <div class="input-group mb-3">
+        <span class="input-group-text">Matériel</span>
+        <textarea class="form-control" aria-label="Matériel" name="mail" rows="25">
+    
+    Bonjour,
+    
+    Pouvez-vous me faire un devis pour :
+    
+    Matériel :
+    {{ achat.materiel }}
+    
+    Adresse de facturation :
+    SIRET : {{ achat.cabinet_facturation.siret }}
+    {{ achat.cabinet_facturation.nom_gcl }}
+    {{ achat.cabinet_facturation.nom_juridique }}
+    {{ achat.cabinet_facturation.adresse }}
+    {{ achat.cabinet_facturation.code_postal }}
+    {{ achat.cabinet_facturation.ville }}
+    
+    Adresse de livraison :
+    {{ achat.cabinet_livraison.nom_gcl }}
+    {{ achat.cabinet_livraison.nom_juridique }}
+    {{ achat.cabinet_livraison.adresse }}
+    {{ achat.cabinet_livraison.code_postal }}
+    {{ achat.cabinet_livraison.ville }}
+    
+    (Ref interne : {{ achat.ref_interne }})
+    
+    Merci par avance. 
+    
+        </textarea>
+    
+    </div>
 
 
 

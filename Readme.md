@@ -49,7 +49,7 @@ pip freeze (> requirements.txt)
 # a faire : 
     # si Get request : Afficher form vide : OK
     # Si Post request : récupérer les données : OK
-    # valider les données : tester avec nom de plus de 3 lettres
+    # valider les données : tester avec nom de plus de 3 lettres : OK
 
     Envoyer un mail
 
@@ -58,9 +58,12 @@ pip freeze (> requirements.txt)
     Faire des tests :
     - tester validation error si nom gcl < 2 caractères
 
-  -cabinetV2 form à remplacer (par CabinetForm) : 
--mettre index.html dans répertoire Home :
+  -cabinetV2 form à remplacer (par CabinetForm) : laisser tel quel
+  -mettre index.html dans répertoire Home : OK
 
-Pour afficher le mail :
+ # Pour afficher le mail :
  passer le dict du formulaire d'achat
- et mettre en forme dans le TextArea
+ et mettre en forme dans le TextArea : OK
+
+- Rajouter un champ commentaire dans la table Achat
+- Ajouter le bouton Javascript pour 1 config utilisateur
