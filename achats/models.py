@@ -1,8 +1,10 @@
 from datetime import date, timezone
 from email.policy import default
 from statistics import mode
+
 from django.db import models
 from django.forms import ValidationError
+
 
 # Create your models here.
 class Cabinet(models.Model):
@@ -24,6 +26,7 @@ class Achat(models.Model):
     materiel = models.TextField()
     date_devis = models.DateField(auto_now_add=True)
     valide = models.BooleanField(default=False)
+    commentaire = models.CharField(max_length=300, default="---")
 
     def __str__(self) -> str:
         return "achat ref interne : {}".format(self.ref_interne)

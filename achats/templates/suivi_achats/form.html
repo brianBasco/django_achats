@@ -8,28 +8,21 @@
         {% load bootstrap5 %}
         {# Display django.contrib.messages as Bootstrap alerts #}
         {# {% bootstrap_messages %} #}
-        <h1>Devis</h1>
+        <h1>Modification de l'achat</h1>
 
         {# Display a form #}
-        <form action="achat" method="post" class="form p-2">
+        <form method="post" class="form p-2">
             {% csrf_token %}
 
             {% bootstrap_form form %}
 
 
-            <button type="submit" class="btn btn-primary">Générer</button>
+            <button type="submit" class="btn btn-primary">Modifier</button>
 
 
         </form>
 
 
-
-        <div class="container p-2">
-
-            <button id="config_utilisateur" class="btn btn-primary" onclick="ajouterConfigUtil()">Config
-                utilisateur</button>
-
-        </div>
 
     </div>
 </div>

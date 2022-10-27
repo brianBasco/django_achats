@@ -1,6 +1,14 @@
-from django.shortcuts import render
 
-from achats.forms import AchatForm, CabinetV2Form
+from asyncio.windows_events import NULL
+from contextlib import nullcontext
+from queue import Empty
+
+from django.core.mail import send_mail
+from django.forms import NullBooleanField
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+
+from achats.forms import AchatForm, CabinetV2Form, CommandeForm
 from achats.models import Achat, Cabinet
 
 
@@ -54,5 +62,43 @@ def postCabinet(request):
     return render(request, 'cabinets/form.html', {'form': form})
 
 
+# ajouter de la recherche suivant des critères
 def suivi_achats(request):
-    return "OK"
+    #Affichage des achats
+    achats = Achat.objects.all()
+    # options avec valide et dates
+    options = request.GET.dict()
+    #print (options)
+    print("options is empty ?? :" + str(not bool(options)))
+    if options :
+        print (options)
+        achats = Achat.objects.filter(valide=options['valide'])
+    
+    return render(request, 'suivi_achats/index.html', {'achats': achats})
+
+def modifier_achat(request, id: int):
+    achat = Achat.objects.get(pk=id)
+    form = CommandeForm(instance=achat)
+    if request.method == "POST":
+        form = CommandeForm(request.POST, instance=achat)
+        if form.is_valid():
+            achat = form.save(commit = False)
+            achat.save()
+            return redirect(to=suivi_achats)
+    return render(request, 'suivi_achats/form.html', {'form' : form})
+
+def envoyer_mail(request):
+
+    #récupération de POST
+    _subject = "GCL - Devis Ref interne : " + request.POST.get("sujet") 
+    _message = request.POST.get("message")
+    _from = "from@example.com"
+    _to = ['bast620@gmail.com']
+    send_mail(
+    _subject,
+    _message,
+    _from,
+    _to,
+    fail_silently=False,)
+    # renvoyer un flash message : Mail envoyé !
+    return redirect(to=index)

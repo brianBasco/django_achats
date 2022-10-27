@@ -46,6 +46,24 @@ py manage.py migrate (génère la migration dans la Bdd)
 Voir les librairies installées pour le projet
 pip freeze (> requirements.txt)
 
+# mail SMTP
+# installation de aiostpd :
+dans environnement virtuel : pip install aiosmtpd
+# lancement du service de SMTP privé pour affichage dans terminal
+py -m aiosmtpd -n -l localhost:8025
+
+# conf dans Settings.py du projet :
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 8025
+
+# url inversées :
+{% for yearvar in year_list %}
+<li><a href="{% url 'news-year-archive' yearvar %}">{{ yearvar }} Archive</a></li>
+{% endfor %}
+'news-year-archive' = name dans fichiers url
+yearvar = paramètres s'il y en a
+
 # a faire : 
     # si Get request : Afficher form vide : OK
     # Si Post request : récupérer les données : OK
@@ -67,3 +85,5 @@ pip freeze (> requirements.txt)
 
 - Rajouter un champ commentaire dans la table Achat
 - Ajouter le bouton Javascript pour 1 config utilisateur
+
+# utiliser Collapse avec Bootstrap plutôt que Jquery pour afficher les commentaires

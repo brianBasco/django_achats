@@ -5,10 +5,19 @@
 <div class="container">
 
     {% load bootstrap5 %}
-    <div class="input-group mb-3">
-        <span class="input-group-text">Matériel</span>
-        <textarea class="form-control" aria-label="Matériel" name="mail" rows="25">
-    
+
+    <form action="envoyer_mail" method="POST">
+        {% csrf_token %}
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Ref interne : </span>
+            <input class="form-control p-2" type="text" name="sujet" id="sujet" value="{{ achat.ref_interne }}">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Matériel</span>
+            <textarea class="form-control p-2" aria-label="Matériel" name="message" rows="25">
+
     Bonjour,
     
     Pouvez-vous me faire un devis pour :
@@ -36,8 +45,12 @@
     Merci par avance. 
     
         </textarea>
-    
-    </div>
+
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Envoyer mail">
+
+    </form>
 
 
 

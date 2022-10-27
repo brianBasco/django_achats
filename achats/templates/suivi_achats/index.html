@@ -1,0 +1,51 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="container d-grip gap-3">
+        {% load bootstrap5 %}
+
+        <h1>Suivi des achats</h1>
+
+        <div class="container">
+
+            <div class="card">
+                <div class="card-body">
+                    <form action="">
+                        <label for="valide">validés</label>
+
+                        <label for="par_date">Par date</label>
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+        {% for achat in achats %}
+        <div id="achat_id-{{ achat.id }}" class="card">
+            <div class="card-body">
+                <div> Jour : {{ achat.date_devis }}</div>
+                <div>facturé : {{ achat.cabinet_facturation }}</div>
+                <div>livré : {{ achat.cabinet_livraison }}</div>
+                <div>Ref interne : {{ achat.ref_interne }}</div>
+                <div>Matériel : {{ achat.materiel }}</div>
+                <div><button class="btn btn-primary btn-sm dropdown-toggle"
+                        onclick="afficherCommentaire('{{ achat.id }}')">Commentaire</button>
+                </div>
+                <a class="btn btn-primary btn-sm" href="{% url 'modifier_achat' achat.id %}">Modifier</a>
+                <div id="commentaireId_{{ achat.id }}" class="container p-2" style="display: none">{{ achat.commentaire
+                    }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock content %}

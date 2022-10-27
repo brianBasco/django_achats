@@ -1,10 +1,10 @@
 from typing import Sequence
+
 from django import forms
 from django.forms import ModelForm, ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from .models import Achat, Cabinet
-
 
 """ Modèle de formulaire non utilisé, à garder pour l'exemple"""
 class CabinetForm(forms.Form):
@@ -48,8 +48,26 @@ class AchatForm(ModelForm):
 
     class Meta:
         model = Achat
-        exclude = ['date_devis', 'valide']
+        exclude = ['date_devis', 'valide', 'commentaire']
         #fields = '__all__'
+        labels = {
+            'cabinet_facturation' : _('Facturation'),
+            'cabinet_livraison' : _('Livraison'),
+            'ref_interne' : _('Ref interne'),
+            'materiel' : _('Matériel'),
+            'date_devis' : _('Date'),
+            'valide' : _('validé')
+        }
+
+
+# Pour la nomenclature : 
+# un achat pour le devis et une commande lorsque l'ordre d'achat est passé
+class CommandeForm(ModelForm):
+
+    class Meta:
+        model = Achat
+        #exclude = ['date_devis', 'valide', 'commentaire']
+        fields = '__all__'
         labels = {
             'cabinet_facturation' : _('Facturation'),
             'cabinet_livraison' : _('Livraison'),
